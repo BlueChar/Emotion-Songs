@@ -45,7 +45,6 @@ batch_size = 64
 num_epoch = 80
 
 # Data generators
-train_datagen = ImageDataGenerator(rescale=1./255)
 val_datagen = ImageDataGenerator(rescale=1./255)
 
 train_datagen = ImageDataGenerator(
@@ -58,7 +57,12 @@ train_datagen = ImageDataGenerator(
     horizontal_flip=True,
     fill_mode='nearest'
 )
-
+Train_generator = train_datagen.flow_from_directory(
+        val_dir,
+        target_size=(48, 48),
+        batch_size=batch_size,
+        color_mode="grayscale",
+        class_mode='categorical')
 validation_generator = val_datagen.flow_from_directory(
         val_dir,
         target_size=(48, 48),
